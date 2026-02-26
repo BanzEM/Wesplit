@@ -13,6 +13,8 @@ struct ContentView: View {
     @State private var tipPercentage = 10
     @State private var numberOfPeople = 2
     
+    let tips = [5, 10, 15, 20, 25]
+    
     
     var body: some View {
        NavigationStack {
@@ -20,6 +22,20 @@ struct ContentView: View {
                 Section{
                     TextField("Amount", value: $checkAmount, format: .currency(code: Locale.current.currency?.identifier ??  "ZAR" ))
                         .keyboardType(.decimalPad)
+                    
+                    Picker("Number of people", selection: $numberOfPeople){
+                        ForEach(2..<100){
+                            Text("\($0) people")
+                        }
+                    }
+                }
+                
+                Section{
+                    Picker("Tip Percentage",selection: $tipPercentage){
+                        ForEach(tips, id: \.self){
+                            Text("\($0)")
+                        }
+                    }
                 }
                 
                 Section{
